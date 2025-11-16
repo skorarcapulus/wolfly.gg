@@ -33,20 +33,35 @@ This is a Symfony 7.3 application running on PHP 8.2 with PostgreSQL 13 as the d
 
 ## Development Commands
 
-**Docker Operations:**
+**Make Commands (Recommended):**
+```bash
+# Show all available commands
+make help
+
+# Initial project setup (clean install)
+make init
+
+# Start the project
+make up
+
+# Stop the project
+make down
+
+# Connect to app container
+make ssh
+
+# Create a new database migration
+make migration
+```
+
+**Direct Docker Operations:**
 ```bash
 # Start development environment
-docker-compose up
-
-# Start in detached mode
 docker-compose up -d
 
-# Build with specific target (development or production)
+# Build with specific target
 TARGET=development docker-compose build
 TARGET=production docker-compose build
-
-# Stop containers
-docker-compose down
 
 # View logs
 docker-compose logs -f app
@@ -54,32 +69,19 @@ docker-compose logs -f app
 
 **Symfony Console (inside container):**
 ```bash
-# Execute console commands
-docker-compose exec app php bin/console
+# Execute console commands via make ssh, then:
+php bin/console
 
-# Common console commands
+# Or directly:
 docker-compose exec app php bin/console cache:clear
 docker-compose exec app php bin/console debug:router
 docker-compose exec app php bin/console debug:container
-docker-compose exec app php bin/console list
 ```
 
 **Database Access:**
 ```bash
 # Connect to PostgreSQL database
 docker-compose exec db psql -U symfony symfony_db
-```
-
-**Composer Operations (inside container):**
-```bash
-# Install dependencies
-docker-compose exec app composer install
-
-# Update dependencies
-docker-compose exec app composer update
-
-# Dump optimized autoloader
-docker-compose exec app composer dump-autoload --optimize
 ```
 
 ## Environment Configuration
