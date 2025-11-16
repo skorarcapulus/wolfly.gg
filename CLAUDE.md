@@ -52,6 +52,15 @@ make ssh
 
 # Create a new database migration
 make migration
+
+# Execute Symfony console commands
+make console                    # Show all console commands
+make console cache:clear        # Clear cache
+make console debug:router       # Debug routes
+make console list               # List all commands
+
+# Rebuild frontend assets
+make frontend
 ```
 
 **Direct Docker Operations:**
