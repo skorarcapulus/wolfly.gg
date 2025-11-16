@@ -1,0 +1,31 @@
+services:
+  app:
+    build:
+      context: ./app
+      target: ${TARGET:-development}
+    ports:
+      - "80:80"
+    volumes:
+      - ./app:/srv/app:rw,cached
+      - ./app/var:/srv/app/var:rw,cached
+    env_file:
+      - ./.env
+    environment:
+      APP_ENV: ${APP_ENV:-dev}
+      DATABASE_URL: "postgresql://${DB_USER:-symfony}:${DB_PASSWORD:-symfony}@db:5432/${DB_NAME:-symfony_db}?serverVersion=13&charset=utf8"
+    depends_on:
+      - db
+    
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: ${DB_USER:-symfony}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-symfony}
+      POSTGRES_DB: ${DB_NAME:-symfony_db}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:
