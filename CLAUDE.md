@@ -61,6 +61,10 @@ make console list               # List all commands
 
 # Rebuild frontend assets
 make frontend
+
+# Generate and serve documentation
+make docs                       # Generate code documentation
+make docs-serve                 # Serve docs on http://localhost:8080
 ```
 
 **Direct Docker Operations:**
@@ -130,6 +134,18 @@ PostgreSQL is configured via environment variables with the default connection:
 - Password: symfony
 - Database: symfony_db
 
+## Documentation
+
+**Code Documentation:**
+- Generated with phpDocumentor from PHPDoc comments
+- Run `make docs` to generate documentation
+- Run `make docs-serve` to view at http://localhost:8080
+- Always document classes, methods, and parameters with PHPDoc blocks
+
+**API Documentation (Future):**
+- When API Platform is installed, API docs will be automatically available at http://dev.wolfly.localhost/api/docs
+- No additional configuration needed - API Platform generates OpenAPI/Swagger docs automatically
+
 ## Adding New Features
 
 When creating new Symfony components:
@@ -137,3 +153,4 @@ When creating new Symfony components:
 2. Services are auto-registered from `app/src/` with autowiring enabled
 3. Routes can be defined via attributes on controllers or in `app/config/routes.yaml`
 4. Configuration goes in `app/config/packages/` for bundle-specific settings
+5. Always add PHPDoc comments for automatic documentation generation

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor
+    configVersion="3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.phpdoc.org"
+    xsi:schemaLocation="https://www.phpdoc.org https://raw.githubusercontent.com/phpDocumentor/phpDocumentor/master/data/xsd/phpdoc.xsd"
+>
+    <title>Wolfly.gg - Code Documentation</title>
+    <paths>
+        <output>docs/code</output>
+        <cache>var/cache/phpdoc</cache>
+    </paths>
+    <version number="latest">
+        <api>
+            <source dsn=".">
+                <path>app/src</path>
+            </source>
+            <output>docs/code</output>
+            <ignore hidden="true" symlinks="true">
+                <path>app/var/**/*</path>
+                <path>app/vendor/**/*</path>
+                <path>app/migrations/**/*</path>
+            </ignore>
+            <extensions>
+                <extension>php</extension>
+            </extensions>
+            <default-package-name>App</default-package-name>
+        </api>
+    </version>
+    <setting name="graphs.enabled" value="true"/>
+    <setting name="guides.enabled" value="true"/>
+    <template name="default"/>
+</phpdocumentor>

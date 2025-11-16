@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help up init down ssh migration console frontend
+.PHONY: help up init down ssh migration console frontend docs docs-serve
 
 help: ## Show this help message
 	@echo "Wolfly.gg - Available Commands:"
@@ -15,6 +15,8 @@ help: ## Show this help message
 	@echo "  make console           - Show Symfony console commands"
 	@echo "  make console cache:clear - Execute Symfony console command"
 	@echo "  make frontend          - Rebuild frontend assets"
+	@echo "  make docs              - Generate code documentation"
+	@echo "  make docs-serve        - Serve documentation locally"
 
 up: ## Start the project
 	@bash scripts/make/up.sh
@@ -36,6 +38,12 @@ console: ## Execute Symfony console commands (usage: make console [command])
 
 frontend: ## Rebuild frontend assets and clear cache
 	@bash scripts/make/frontend.sh
+
+docs: ## Generate code documentation
+	@bash scripts/make/docs.sh
+
+docs-serve: ## Serve documentation locally on port 8080
+	@bash scripts/make/docs-serve.sh
 
 # Catch-all target to prevent "No rule to make target" errors when passing arguments to console
 %:
