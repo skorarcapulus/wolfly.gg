@@ -148,6 +148,11 @@ class Document
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->title ?? '';
+    }
+
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
     {
