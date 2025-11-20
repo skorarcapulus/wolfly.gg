@@ -30,7 +30,7 @@ class Project
     /**
      * @var Collection<int, Overlay>
      */
-    #[ORM\ManyToMany(targetEntity: Overlay::class, mappedBy: 'project')]
+    #[ORM\ManyToMany(targetEntity: Overlay::class, mappedBy: 'projects')]
     private Collection $overlays;
 
     public function __construct()

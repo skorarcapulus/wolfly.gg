@@ -126,15 +126,15 @@ class Document
     /**
      * @return Collection<int, Overlay>
      */
-    public function getOverlay(): Collection
+    public function getOverlays(): Collection
     {
-        return $this->overlay;
+        return $this->overlays;
     }
 
     public function addOverlay(Overlay $overlay): static
     {
-        if (!$this->overlay->contains($overlay)) {
-            $this->overlay->add($overlay);
+        if (!$this->overlays->contains($overlay)) {
+            $this->overlays->add($overlay);
         }
 
         return $this;
@@ -142,7 +142,7 @@ class Document
 
     public function removeOverlay(Overlay $overlay): static
     {
-        $this->overlay->removeElement($overlay);
+        $this->overlays->removeElement($overlay);
 
         return $this;
     }
