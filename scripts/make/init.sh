@@ -33,6 +33,10 @@ docker-compose exec -T app php bin/console cache:clear
 echo "🔐 Setting proper permissions..."
 docker-compose exec -T app chown -R www-data:www-data var/
 
+# Create the database
+echo "🗄️  Creating the database..."
+docker-compose exec -T app php bin/console doctrine:database:create --if-not-exists
+
 echo ""
 echo "✅ Project initialized successfully!"
 echo "🌐 Application: http://dev.wolfly.localhost"

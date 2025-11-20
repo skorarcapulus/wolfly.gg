@@ -9,6 +9,7 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "doctrine/doctrine-migrations-bundle": "^3.7",
         "easycorp/easyadmin-bundle": "^4.27",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
@@ -67,5 +68,8 @@
             "require": "7.3.*",
             "docker": false
         }
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.64"
     }
 }
