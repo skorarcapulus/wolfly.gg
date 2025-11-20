@@ -13,7 +13,7 @@ if ! docker-compose ps | grep -q "app.*Up"; then
 fi
 
 # Check if doctrine is installed
-if ! docker-compose exec -T app php bin/console list | grep -q "doctrine:migrations"; then
+if ! docker-compose exec -T --user appuser app php bin/console list | grep -q "doctrine:migrations"; then
     echo "❌ Error: Doctrine Migrations is not installed!"
     echo ""
     echo "To install Doctrine Migrations, run:"
@@ -28,10 +28,10 @@ read -p "Enter migration name (optional): " migration_name
 
 if [ -z "$migration_name" ]; then
     # Create migration without name
-    docker-compose exec -T app php bin/console doctrine:migrations:diff
+    docker-compose exec -T --user appuser app php bin/console doctrine:migrations:diff
 else
     # Create migration with name
-    docker-compose exec -T app php bin/console make:migration
+    docker-compose exec -T --user appuser app php bin/console make:migration
 fi
 
 echo ""
@@ -39,4 +39,4 @@ echo "✅ Migration created successfully!"
 echo ""
 echo "Next steps:"
 echo "  - Review the migration file in app/migrations/"
-echo "  - Run 'docker-compose exec app php bin/console doctrine:migrations:migrate' to apply"
+echo "  - Run 'make console doctrine:migrations:migrate' to apply"

@@ -13,10 +13,10 @@ fi
 if [ $# -eq 0 ]; then
     echo "🎮 Symfony Console"
     echo ""
-    docker-compose exec app php bin/console
+    docker-compose exec --user appuser app php bin/console
 else
     # Execute console command with all arguments
     echo "🎮 Executing: php bin/console $*"
     echo ""
-    docker-compose exec app php bin/console "$@"
+    docker-compose exec --user appuser app php bin/console "$@"
 fi
