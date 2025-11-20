@@ -20,7 +20,8 @@ RUN apk add --no-cache \
     nodejs \
     npm \
     nginx \
-    shadow
+    shadow \
+    icu-dev
 
 # Install PHP extensions
 RUN docker-php-ext-install \
@@ -29,7 +30,8 @@ RUN docker-php-ext-install \
     mbstring \
     zip \
     bcmath \
-    gd
+    gd \
+    intl
 
 # Create appuser with matching host UID/GID
 RUN deluser --remove-home www-data 2>/dev/null || true && \
@@ -99,7 +101,8 @@ RUN apk add --no-cache \
     oniguruma-dev \
     postgresql-dev \
     nginx \
-    supervisor
+    supervisor \
+    icu-dev
 
 # Install PHP extensions
 RUN docker-php-ext-install \
@@ -109,7 +112,8 @@ RUN docker-php-ext-install \
     zip \
     bcmath \
     gd \
-    opcache
+    opcache \
+    intl
 
 # Configure OPcache
 RUN echo "opcache.enable=1" >> /usr/local/etc/php/conf.d/opcache.ini && \
