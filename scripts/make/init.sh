@@ -39,7 +39,7 @@ docker-compose exec -T app php bin/console doctrine:database:drop --force --if-e
 docker-compose exec -T app php bin/console doctrine:database:create
 
 # Run database migrations when migrations folder is not empty
-MIGRATION_COUNT=$(docker-compose exec -T app sh -c "ls -1q migrations/*.php 2>/dev/null | wc -l")
+MIGRATION_COUNT=$(docker-compose exec -T app sh -c "ls -1 migrations/*.php 2>/dev/null | wc -l")
 if [ "$MIGRATION_COUNT" -gt 0 ]; then
     echo "🛠️  Running database migrations..."
     docker-compose exec -T app php bin/console doctrine:migrations:migrate --no-interaction
