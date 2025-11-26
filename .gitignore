@@ -5,6 +5,8 @@
 # Environment files
 .env.local
 .env.*.local
+.env
+.env.dist
 
 # IDE
 .idea/
