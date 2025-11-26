@@ -29,9 +29,9 @@ docker-compose exec -T app composer install --no-interaction --prefer-dist --opt
 echo "🧹 Clearing Symfony cache..."
 docker-compose exec -T app php bin/console cache:clear
 
-# Set proper permissions
-echo "🔐 Setting proper permissions..."
-docker-compose exec -T app chown -R www-data:www-data var/
+# # Set proper permissions
+# echo "🔐 Setting proper permissions..."
+# docker-compose exec -T app chown -R www-data:www-data var/
 
 # Create the database (drop first if exists)
 echo "🗄️  Creating the database..."

@@ -99,12 +99,43 @@ docker-compose exec db psql -U symfony symfony_db
 
 ## Environment Configuration
 
-The application uses environment variables defined in `.env`:
+The application uses a two-tier environment variable system following Symfony best practices:
+
+**`.env` (Committed to Git):**
+- Contains default values and documentation for all environment variables
+- Safe to commit - no sensitive data
+- Serves as template and documentation for all developers
+- Variables: `APP_ENV`, `TARGET`, `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `APP_SECRET`
+
+**`.env.local` (NOT Committed - in .gitignore):**
+- Overrides values from `.env` for local development
+- Contains your personal/sensitive configuration
+- Automatically loaded by Docker Compose (optional, not required)
+- Create this file to customize your local setup without affecting other developers
+
+**Environment Variables:**
 - `APP_ENV` - Application environment (dev, prod, test)
 - `TARGET` - Docker build target (development, production)
+- `APP_SECRET` - Symfony application secret (change in production!)
 - Database connection: `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`
 
+**Docker Compose Loading Order:**
+1. `.env` is loaded first (required)
+2. `.env.local` overrides `.env` values (optional)
+3. Values are used for variable substitution in `docker-compose.yml`
+
 The `DATABASE_URL` is automatically constructed in docker-compose.yml from individual database variables.
+
+**Example Setup:**
+```bash
+# Use default values from .env (works out of the box)
+make up
+
+# Or customize by creating .env.local:
+cp .env .env.local
+# Edit .env.local with your custom values
+make up
+```
 
 ## Service Ports
 

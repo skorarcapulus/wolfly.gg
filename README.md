@@ -87,16 +87,42 @@ make docs-serve        # Serve docs at http://localhost:8080
 
 ### Environment Configuration
 
-The application uses environment variables defined in `.env`:
+The project uses a two-tier environment variable system:
+
+**`.env` (committed to repository)**
+- Contains safe default values and serves as documentation
+- All developers share these base values
+- Safe to commit - no sensitive data
+
+**`.env.local` (optional, not committed)**
+- Overrides `.env` values for your local setup
+- Add your personal/sensitive configuration here
+- Automatically loaded by Docker Compose if it exists
+- Ignored by git
+
+**Available Variables:**
 
 ```env
 APP_ENV=dev              # Application environment (dev, prod, test)
 TARGET=development       # Docker build target (development, production)
+APP_SECRET=...          # Symfony secret (change in production!)
 DB_HOST=db              # Database host
 DB_PORT=5432            # Database port
 DB_USER=symfony         # Database user
 DB_PASSWORD=symfony     # Database password
 DB_NAME=symfony_db      # Database name
+```
+
+**Customize Your Setup:**
+
+```bash
+# Option 1: Use defaults (just works)
+make up
+
+# Option 2: Customize locally
+cp .env .env.local
+# Edit .env.local with your values
+make up
 ```
 
 ### Database Management
