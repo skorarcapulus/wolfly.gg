@@ -23,7 +23,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Wolfly Admin');
+            ->setTitle('Wolfly.GG Admin');
     }
 
     public function configureMenuItems(): iterable
