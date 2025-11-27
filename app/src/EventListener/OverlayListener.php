@@ -9,6 +9,7 @@ use Doctrine\ORM\Events;
 
 #[AsEntityListener(event: Events::postPersist, entity: Document::class)]
 #[AsEntityListener(event: Events::postUpdate, entity: Document::class)]
+#[AsEntityListener(event: Events::postRemove, entity: Document::class)]
 class OverlayListener
 {
     private OverlayGeneratorService $overlayGeneratorService;
@@ -26,6 +27,11 @@ class OverlayListener
     public function postUpdate(Document $document): void
     {
         $this->generateOverlays($document);
+    }
+
+    public function postRemove(Document $document): void
+    {
+        $this->overlayGeneratorService->deleteDocumentFile($document);
     }
 
     private function generateOverlays(Document $document): void

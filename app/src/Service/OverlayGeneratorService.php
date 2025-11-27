@@ -21,7 +21,7 @@ class OverlayGeneratorService
          * @var Document $document
          */
         foreach ($documents as $document) {
-            if ($document->isReleased()) {
+            if ($document->isReleased() && $document->getSource() !== null && $document->getType() !== null) {
                 $folderPath = $this->getFolderPath($overlay, $document);
                 $sourceCode = $document->getSource();
                 $filePath = sprintf('%s/%s.%s', $folderPath, $document->getId(), $document->getType()->value);
@@ -37,7 +37,9 @@ class OverlayGeneratorService
                 $filePath = sprintf('%s/%s.%s', $folderPath, $document->getId(), $document->getType()->value);
 
                 if (file_exists($filePath)) {
-                    unlink($filePath);
+                    if (!unlink($filePath)) {
+                        throw new \RuntimeException(sprintf('Failed to delete file: %s', $filePath));
+                    }
                 }
             }
         }
@@ -53,5 +55,20 @@ class OverlayGeneratorService
         }
 
         return $folderPath; 
+    }
+
+    public function deleteDocumentFile(Document $document): void
+    {
+        $overlay = $document->getOverlay();
+        if ($overlay) {
+            $folderPath = $this->getFolderPath($overlay, $document);
+            $filePath = sprintf('%s/%s.%s', $folderPath, $document->getId(), $document->getType()->value);
+
+            if (file_exists($filePath)) {
+                if (!unlink($filePath)) {
+                    throw new \RuntimeException(sprintf('Failed to delete file: %s', $filePath));
+                }
+            }
+        }
     }
 }
