@@ -29,7 +29,7 @@ class OverlayGeneratorService
          * @var Document $document
          */
         foreach ($documents as $document) {
-            if ($document->isReleased() && $document->getSource() !== null && $document->getType() !== null) {
+            if ($document->isReleased() && $document->getSource() !== null) {
                 $folderPath = $this->getFolderPath($overlay, $document);
                 $sourceCode = $document->getSource();
                 $filePath = sprintf('%s/%s.%s', $folderPath, $document->getId(), $document->getType()->value);
@@ -73,6 +73,10 @@ class OverlayGeneratorService
 
     public function getFolderPath(Overlay $overlay, Document $document): string
     {
+        if ($document->getType() === null) {
+            throw new \InvalidArgumentException('Document type is null, cannot determine folder path.');
+        }
+
         $folderPath = sprintf('%s/%s/%s', $this->generatedTemplatesPath, $overlay->getId(), $document->getType()->value);
         if (!is_dir($folderPath)) {
             $this->logger->debug('Creating directory', ['path' => $folderPath]);
