@@ -24,7 +24,7 @@ class OverlayGeneratorService
             if ($document->isReleased()) {
                 $folderPath = $this->getFolderPath($overlay, $document);
                 $sourceCode = $document->getSource();
-                $filePath = sprintf('%s/%s.%s', $folderPath, $document->getTitle(), $document->getType()->value);
+                $filePath = sprintf('%s/%s.%s', $folderPath, $document->getId(), $document->getType()->value);
 
                 file_put_contents($filePath, $sourceCode);
             }
