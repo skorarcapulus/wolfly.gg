@@ -3,21 +3,26 @@
 namespace App\Service;
 
 use App\Entity\Overlay;
+use App\Entity\Document;
 
 class OverlayGeneratorService
 {
-    public function __construct()
+    public function __construct(
+        private readonly string $generatedTemplatesPath
+    )
     {
-        // Constructor code here
     }
 
     public function generateOverlay(Overlay $overlay): void
     {
         $documents = $overlay->getDocuments();
-        $folderPath = $this->getFolderPath($overlay);
 
+        /**
+         * @var Document $document
+         */
         foreach ($documents as $document) {
             if ($document->isReleased()) {
+                $folderPath = $this->getFolderPath($overlay, $document);
                 $sourceCode = $document->getSource();
                 $filePath = sprintf('%s/%s.%s', $folderPath, $document->getTitle(), $document->getType()->value);
 
@@ -26,13 +31,15 @@ class OverlayGeneratorService
         }
     }
 
-    public function getFolderPath(Overlay $overlay): string
+    public function getFolderPath(Overlay $overlay, Document $document): string
     {
-        $folderPath = sprintf('../templates/_generated/%s', $overlay->getId());
+        $folderPath = sprintf('%s/%s/%s', $this->generatedTemplatesPath, $overlay->getId(), $document->getType()->value);
         if (!is_dir($folderPath)) {
-            mkdir($folderPath, 0755, true);
+            if(!mkdir($folderPath, 0755, true)) {
+                throw new \RuntimeException(sprintf('Failed to create directory: %s', $folderPath));
+            }
         }
 
-        return $folderPath;
+        return $folderPath; 
     }
 }
