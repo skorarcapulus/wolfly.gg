@@ -31,7 +31,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
         yield MenuItem::section('Content Management');
-        yield MenuItem::linkToCrud('Projects', 'fa fa-folder', Project::class);
         yield MenuItem::linkToCrud('Overlays', 'fa fa-layer-group', Overlay::class);
         yield MenuItem::linkToCrud('Documents', 'fa fa-file-code', Document::class);
     }

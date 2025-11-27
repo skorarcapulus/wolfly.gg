@@ -5,11 +5,17 @@ set -e
 echo "🚀 Starting Wolfly.gg..."
 echo ""
 
+# Delete logs if in DEV environment
+APP_ENV=$(grep APP_ENV .env | cut -d '=' -f2)
+if [ "$APP_ENV" = "dev" ]; then
+    echo "🗑️  Deleting logs (DEV environment)..."
+    rm -rf app/var/log/*.log
+fi
+
 # Start Docker containers
 docker-compose up -d
 
 # Check if we're in dev environment and reset database
-APP_ENV=$(grep APP_ENV .env | cut -d '=' -f2)
 if [ "$APP_ENV" = "dev" ]; then
     echo "🗑️  Resetting database (DEV environment)..."
     docker-compose exec -T app php bin/console doctrine:database:drop --force --if-exists
@@ -33,6 +39,11 @@ docker-compose exec -T app php bin/console cache:clear
 # Rebuild frontend assets by calling the frontend make script
 echo "🎨 Rebuilding frontend assets..."
 ./scripts/make/frontend.sh
+
+# Delete generated templates
+echo "🗑️  Deleting generated templates..."
+docker-compose exec -T app rm -rf templates/_generated/
+
 
 echo ""
 echo "✅ Project started successfully!"

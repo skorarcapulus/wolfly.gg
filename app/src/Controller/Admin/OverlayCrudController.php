@@ -23,10 +23,6 @@ class OverlayCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
             BooleanField::new('isReleased'),
-            AssociationField::new('projects')
-                ->setFormTypeOptions([
-                    'by_reference' => false,
-                ]),
             AssociationField::new('documents')
                 ->setFormTypeOptions([
                     'by_reference' => false,

@@ -8,3 +8,7 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> project/code-generator-bundle ###
+/templates/_generated/
+###< project/code-generator-bundle ###

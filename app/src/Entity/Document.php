@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Enum\DocumentType;
 use App\Repository\DocumentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,9 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Document
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private ?string $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -36,18 +35,15 @@ class Document
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    /**
-     * @var Collection<int, Overlay>
-     */
-    #[ORM\ManyToMany(targetEntity: Overlay::class, inversedBy: 'documents')]
-    private Collection $overlays;
+    #[ORM\ManyToOne(targetEntity: Overlay::class, inversedBy: 'documents')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
+    private ?Overlay $overlay = null;
 
     public function __construct()
     {
-        $this->overlays = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -124,26 +120,14 @@ class Document
         return $this;
     }
 
-    /**
-     * @return Collection<int, Overlay>
-     */
-    public function getOverlays(): Collection
+    public function getOverlay(): ?Overlay
     {
-        return $this->overlays;
+        return $this->overlay;
     }
 
-    public function addOverlay(Overlay $overlay): static
+    public function setOverlay(?Overlay $overlay): static
     {
-        if (!$this->overlays->contains($overlay)) {
-            $this->overlays->add($overlay);
-        }
-
-        return $this;
-    }
-
-    public function removeOverlay(Overlay $overlay): static
-    {
-        $this->overlays->removeElement($overlay);
+        $this->overlay = $overlay;
 
         return $this;
     }

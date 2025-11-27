@@ -34,10 +34,7 @@ class DocumentCrudController extends AbstractCrudController
             CodeEditorField::new('source')
                 ->setNumOfRows(20),
             BooleanField::new('isReleased'),
-            AssociationField::new('overlays')
-                ->setFormTypeOptions([
-                    'by_reference' => false,
-                ]),
+            AssociationField::new('overlay'),
             DateTimeField::new('createdAt')->hideOnForm(),
             DateTimeField::new('updatedAt')->hideOnForm(),
         ];
