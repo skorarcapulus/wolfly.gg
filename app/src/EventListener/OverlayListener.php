@@ -7,9 +7,9 @@ use App\Service\OverlayGeneratorService;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
 
-#[AsEntityListener(event: Events::postFlush, entity: Document::class)]
+#[AsEntityListener(event: Events::postPersist, entity: Document::class)]
 #[AsEntityListener(event: Events::postUpdate, entity: Document::class)]
-class CreateOrUpdateDocumentListener
+class OverlayListener
 {
     private OverlayGeneratorService $overlayGeneratorService;
 
@@ -18,7 +18,7 @@ class CreateOrUpdateDocumentListener
         $this->overlayGeneratorService = $overlayGeneratorService;
     }
 
-    public function postFlush(Document $document): void
+    public function postPersist(Document $document): void
     {
         $this->generateOverlays($document);
     }

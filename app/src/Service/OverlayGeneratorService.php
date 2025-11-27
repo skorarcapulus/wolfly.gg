@@ -26,7 +26,19 @@ class OverlayGeneratorService
                 $sourceCode = $document->getSource();
                 $filePath = sprintf('%s/%s.%s', $folderPath, $document->getId(), $document->getType()->value);
 
-                file_put_contents($filePath, $sourceCode);
+                $result = file_put_contents($filePath, $sourceCode);
+
+                if ($result === false) {
+                    throw new \RuntimeException(sprintf('Failed to write file: %s', $filePath));
+                }
+            } else {
+                // If the document is not released, remove the generated file if it exists
+                $folderPath = $this->getFolderPath($overlay, $document);
+                $filePath = sprintf('%s/%s.%s', $folderPath, $document->getId(), $document->getType()->value);
+
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
             }
         }
     }
