@@ -14,9 +14,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Document
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private ?string $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -47,7 +48,7 @@ class Document
         $this->overlays = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
