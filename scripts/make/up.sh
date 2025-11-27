@@ -34,6 +34,11 @@ docker-compose exec -T app php bin/console cache:clear
 echo "🎨 Rebuilding frontend assets..."
 ./scripts/make/frontend.sh
 
+# Delete generated templates
+echo "🗑️  Deleting generated templates..."
+docker-compose exec -T app rm -rf templates/_generated/
+
+
 echo ""
 echo "✅ Project started successfully!"
 echo "🌐 Application: http://dev.wolfly.localhost"

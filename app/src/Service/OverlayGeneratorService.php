@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Entity\Overlay;
-use App\Entity\Project;
 
 class OverlayGeneratorService
 {
@@ -12,10 +11,10 @@ class OverlayGeneratorService
         // Constructor code here
     }
 
-    public function generateOverlay(Project $project, Overlay $overlay): void
+    public function generateOverlay(Overlay $overlay): void
     {
         $documents = $overlay->getDocuments();
-        $folderPath = $this->getFolderPath($project, $overlay);
+        $folderPath = $this->getFolderPath($overlay);
 
         foreach ($documents as $document) {
             if ($document->isReleased()) {
@@ -27,9 +26,9 @@ class OverlayGeneratorService
         }
     }
 
-    public function getFolderPath(Project $project, Overlay $overlay): string
+    public function getFolderPath(Overlay $overlay): string
     {
-        $folderPath = sprintf('../templates/_generated/%s/overlays/%s', $project->getId(), $overlay->getId());
+        $folderPath = sprintf('../templates/_generated/%s', $overlay->getId());
         if (!is_dir($folderPath)) {
             mkdir($folderPath, 0755, true);
         }

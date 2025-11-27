@@ -30,20 +30,13 @@ class Overlay
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
-     * @var Collection<int, Project>
-     */
-    #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'overlays')]
-    private Collection $projects;
-
-    /**
      * @var Collection<int, Document>
      */
-    #[ORM\ManyToMany(targetEntity: Document::class, mappedBy: 'overlays')]
+    #[ORM\OneToMany(targetEntity: Document::class, mappedBy: 'overlay')]
     private Collection $documents;
 
     public function __construct()
     {
-        $this->projects = new ArrayCollection();
         $this->documents = new ArrayCollection();
     }
 
@@ -101,30 +94,6 @@ class Overlay
     }
 
     /**
-     * @return Collection<int, Project>
-     */
-    public function getProjects(): Collection
-    {
-        return $this->projects;
-    }
-
-    public function addProject(Project $project): static
-    {
-        if (!$this->projects->contains($project)) {
-            $this->projects->add($project);
-        }
-
-        return $this;
-    }
-
-    public function removeProject(Project $project): static
-    {
-        $this->projects->removeElement($project);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Document>
      */
     public function getDocuments(): Collection
@@ -136,7 +105,7 @@ class Overlay
     {
         if (!$this->documents->contains($document)) {
             $this->documents->add($document);
-            $document->addOverlay($this);
+            $document->setOverlay($this);
         }
 
         return $this;
@@ -145,7 +114,7 @@ class Overlay
     public function removeDocument(Document $document): static
     {
         if ($this->documents->removeElement($document)) {
-            $document->removeOverlay($this);
+            $document->setOverlay(null);
         }
 
         return $this;

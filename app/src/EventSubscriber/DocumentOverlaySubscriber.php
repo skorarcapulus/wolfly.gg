@@ -52,12 +52,9 @@ class DocumentOverlaySubscriber
 
     private function generateOverlays(Document $document): void
     {
-        $overlays = $document->getOverlays();
-        foreach ($overlays as $overlay) {
-            $projects = $overlay->getProjects();
-            foreach ($projects as $project) {
-                $this->overlayGeneratorService->generateOverlay($project, $overlay);
-            }
+        $overlay = $document->getOverlay();
+        if ($overlay !== null) {
+            $this->overlayGeneratorService->generateOverlay($overlay);
         }
     }
 }
