@@ -56,11 +56,11 @@
                                     <tr>
                                         <td>{{ document.title ?? 'Unbenannt' }}</td>
                                         <td>
-                                            {% if document.type.value == 'twig.html' %}
+                                            {% if document.type == documentTypeHtml %}
                                                 <span class="badge badge-info">HTML/Twig</span>
-                                            {% elseif document.type.value == 'css' %}
+                                            {% elseif document.type == documentTypeCss %}
                                                 <span class="badge badge-primary">CSS</span>
-                                            {% elseif document.type.value == 'js' %}
+                                            {% elseif document.type == documentTypeJs %}
                                                 <span class="badge badge-warning">JavaScript</span>
                                             {% endif %}
                                         </td>

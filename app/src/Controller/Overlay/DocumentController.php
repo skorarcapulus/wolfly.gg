@@ -3,6 +3,7 @@
 namespace App\Controller\Overlay;
 
 use App\Entity\Document;
+use App\Enum\DocumentType as DocumentTypeEnum;
 use App\Form\DocumentType;
 use App\Repository\DocumentRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,6 +22,9 @@ class DocumentController extends AbstractController
 
         return $this->render('admin/document/index.html.twig', [
             'documents' => $documents,
+            'documentTypeHtml' => DocumentTypeEnum::HTML,
+            'documentTypeCss' => DocumentTypeEnum::CSS,
+            'documentTypeJs' => DocumentTypeEnum::JS,
         ]);
     }
 
@@ -38,6 +42,9 @@ class DocumentController extends AbstractController
 
         return $this->render('admin/document/view.html.twig', [
             'document' => $document,
+            'documentTypeHtml' => DocumentTypeEnum::HTML,
+            'documentTypeCss' => DocumentTypeEnum::CSS,
+            'documentTypeJs' => DocumentTypeEnum::JS,
         ]);
     }
 

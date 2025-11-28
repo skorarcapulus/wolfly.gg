@@ -52,7 +52,6 @@
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    {% block sidebar_menu %}
                     <li class="nav-item">
                         <a href="{{ path('overlay_overview') }}" class="nav-link">
                             <i class="nav-icon fas fa-layer-group"></i>
@@ -65,7 +64,6 @@
                             <p>Dokumente</p>
                         </a>
                     </li>
-                    {% endblock %}
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
