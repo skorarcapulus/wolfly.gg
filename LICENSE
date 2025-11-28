@@ -1,0 +1,45 @@
+WOLFLY PUBLIC LICENSE – Version 1.0
+SPDX-License-Identifier: LicenseRef-WPL-1.0
+Copyright (c) 2025 Raphael Sundermann – All rights reserved.
+
+1. Permission to Use
+You are allowed to use, install, run, and self-host this software for personal or internal purposes, provided that you comply with this license.
+
+2. Non-Commercial Use Only
+You may NOT use this software for any commercial purpose. This includes, but is not limited to:
+- selling the software or any part of it
+- selling hosting, installation, consulting, or support services based on the software
+- generating revenue from the software or from derivative works
+
+Exception: Raphael Sundermann (operating as Wolfly.gg) retains the exclusive right to provide and monetize a commercial hosted service (SaaS) based on this software.
+
+3. No Redistribution / No Public Release
+You may NOT redistribute, publish, upload, or re-release the software, in whole or in part, whether modified or unmodified.
+
+Allowed:
+- private forks
+- private modifications
+- submitting pull requests to the official repository
+
+Not allowed:
+- publishing forks
+- uploading modified versions
+- distributing the code in any way
+
+4. Modifications
+You may modify the software for private use. You may not publish your modified versions.
+
+5. SaaS Restriction
+You may self-host the software only for yourself or your organization.
+
+You may NOT:
+- offer the software to others as a hosted service (paid or free)
+- run it as a platform, commercial service, or public service
+
+Raphael Sundermann retains exclusive rights to offer commercial SaaS versions under the Wolfly.gg brand.
+
+6. No Trademark License
+Nothing in this license grants rights to use the name "Wolfly", "Wolfly.gg", its branding, or logos without prior written permission.
+
+7. No Warranty
+This software is provided “AS IS”, without warranty of any kind. Use at your own risk.

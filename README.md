@@ -17,7 +17,7 @@ Wolfly.GG offers a different approach: a self-hosted platform where you can crea
 
 - **Web-Based Overlay Creation**: Build overlays using HTML, CSS, and JavaScript
 - **Self-Hosted**: Complete control over your data and infrastructure
-- **Open Source**: Transparent, customizable, and community-driven
+- **Source Available**: Transparent, customizable, and community-driven
 - **Modern Tech Stack**: Built with Symfony 7.3, PHP 8.2, and PostgreSQL
 - **Docker Support**: Easy deployment and development setup
 - **SaaS-Ready Architecture**: Designed to support future hosted service offering
@@ -203,7 +203,37 @@ Contributions are welcome! Please feel free to submit issues and pull requests.
 
 ## License
 
-[To be determined]
+📄 License: Wolfly Public License (WPL-1.0)
+
+This project is licensed under the Wolfly Public License (WPL-1.0).
+
+✔ Allowed
+
+- Self-hosting for personal or internal use
+
+- Private forks
+
+- Private modifications
+
+- Pull requests to the official repository
+
+❌ Not Allowed
+
+- Commercial use
+
+- Selling the software or services based on it
+
+- Redistributing or re-releasing the code
++
++ - Offering the software as a hosted service
++
++ - Publishing modified versions or forks
+
+🔐 SaaS Rights
+
+Only Raphael Sundermann (operating as Wolfly.gg) is allowed to offer a commercial SaaS version of this project.
+
+For details, see the full license in the LICENSE file.
 
 ## Support
 

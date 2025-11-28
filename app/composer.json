@@ -1,8 +1,8 @@
 {
-    "name": "symfony/skeleton",
+    "name": "wolfly/platform",
     "type": "project",
-    "license": "MIT",
-    "description": "A minimal Symfony project recommended to create bare bones applications",
+    "license": "LicenseRef-WPL-1.0",
+    "description": "Self-hosted platform for creating stream overlays with HTML, CSS & JavaScript",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
