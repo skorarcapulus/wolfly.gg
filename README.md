@@ -210,24 +210,17 @@ This project is licensed under the Wolfly Public License (WPL-1.0).
 ✔ Allowed
 
 - Self-hosting for personal or internal use
-
 - Private forks
-
 - Private modifications
-
 - Pull requests to the official repository
 
 ❌ Not Allowed
 
 - Commercial use
-
 - Selling the software or services based on it
-
 - Redistributing or re-releasing the code
-+
-+ - Offering the software as a hosted service
-+
-+ - Publishing modified versions or forks
+- Offering the software as a hosted service
+- Publishing modified versions or forks
 
 🔐 SaaS Rights
 
