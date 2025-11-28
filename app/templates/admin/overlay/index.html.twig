@@ -46,7 +46,7 @@
                                 <tr>
                                     <th>Titel</th>
                                     <th>Status</th>
-                                    <th style="width: 200px">Aktionen</th>
+                                    <th style="width: 280px">Aktionen</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,6 +63,7 @@
                                         <td>
                                             {{ buttons.action_buttons(overlay.id, [
                                                 {route: 'overlay_view', icon: 'eye', label: 'Anzeigen', class: 'primary'},
+                                                {route: 'output_overview', icon: 'desktop', label: 'Ausgabe', class: 'info'},
                                                 {route: 'overlay_edit', icon: 'edit', label: 'Bearbeiten', class: 'warning'},
                                                 {route: 'overlay_delete', icon: 'trash', label: 'Löschen', class: 'danger', confirm: true, csrf: 'delete'}
                                             ], 'overlayId') }}

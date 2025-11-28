@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Document;
+namespace App\Controller\Overlay;
 
 use App\Entity\Document;
 use App\Form\DocumentType;
