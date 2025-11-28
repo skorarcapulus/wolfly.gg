@@ -1,0 +1,114 @@
+{#
+    Reusable button macros for AdminLTE
+
+    Usage:
+    {% import 'parts/buttons.html.twig' as buttons %}
+    {{ buttons.action_buttons(overlay.id, [
+        {route: 'overlay_view', icon: 'eye', label: 'Anzeigen', class: 'primary'},
+        {route: 'overlay_edit', icon: 'edit', label: 'Bearbeiten', class: 'warning'},
+        {route: 'overlay_delete', icon: 'trash', label: 'Löschen', class: 'danger'}
+    ]) }}
+#}
+
+{#
+    Generates a group of action buttons
+
+    @param id         The entity ID to pass as parameter
+    @param buttons    Array of button configs with: route, icon, label (optional), class (optional), params (optional), csrf (optional)
+    @param idParam    The parameter name for the ID (default: 'id')
+#}
+{% macro action_buttons(id, buttons, idParam = 'id') %}
+    <div class="btn-group" role="group">
+        {% for button in buttons %}
+            {% set routeParams = button.params|default({})|merge({(idParam): id}) %}
+
+            {# For buttons that need CSRF protection (like delete), use a form #}
+            {% if button.csrf is defined and button.csrf %}
+                <form method="post"
+                      action="{{ path(button.route, routeParams) }}"
+                      style="display: inline;"
+                      {% if button.confirm is defined %}
+                          onsubmit="return confirm('Bist du sicher? Diese Aktion kann nicht rückgängig gemacht werden.')"
+                      {% endif %}>
+                    <input type="hidden" name="_token" value="{{ csrf_token(button.csrf ~ id) }}">
+                    <button type="submit"
+                            class="btn btn-sm btn-{{ button.class|default('primary') }}"
+                            {% if button.title is defined %}
+                                title="{{ button.title }}"
+                            {% endif %}>
+                        <i class="fas fa-{{ button.icon }}"></i>
+                        {% if button.label is defined %} {{ button.label }}{% endif %}
+                    </button>
+                </form>
+            {% else %}
+                {# Regular link for GET requests #}
+                <a href="{{ path(button.route, routeParams) }}"
+                   class="btn btn-sm btn-{{ button.class|default('primary') }}"
+                   {% if button.confirm is defined %}
+                       onclick="return confirm('{{ button.confirm }}')"
+                   {% endif %}
+                   {% if button.title is defined %}
+                       title="{{ button.title }}"
+                   {% endif %}>
+                    <i class="fas fa-{{ button.icon }}"></i>
+                    {% if button.label is defined %} {{ button.label }}{% endif %}
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{#
+    Generates a single action button
+
+    @param route      The route name
+    @param icon       Font Awesome icon name (without 'fa-' prefix)
+    @param label      Button label (optional)
+    @param class      Button color class (default: 'primary')
+    @param params     Route parameters (optional)
+#}
+{% macro action_button(route, icon, label = null, class = 'primary', params = {}) %}
+    <a href="{{ path(route, params) }}"
+       class="btn btn-sm btn-{{ class }}">
+        <i class="fas fa-{{ icon }}"></i>
+        {% if label %} {{ label }}{% endif %}
+    </a>
+{% endmacro %}
+
+{#
+    Generates a button with custom URL (not route)
+
+    @param url        The URL
+    @param icon       Font Awesome icon name (without 'fa-' prefix)
+    @param label      Button label (optional)
+    @param class      Button color class (default: 'primary')
+#}
+{% macro url_button(url, icon, label = null, class = 'primary') %}
+    <a href="{{ url }}"
+       class="btn btn-sm btn-{{ class }}">
+        <i class="fas fa-{{ icon }}"></i>
+        {% if label %} {{ label }}{% endif %}
+    </a>
+{% endmacro %}
+
+{#
+    Generates a dropdown button group
+
+    @param label      Main button label
+    @param icon       Main button icon
+    @param buttons    Array of button configs
+#}
+{% macro dropdown_buttons(label, icon, buttons) %}
+    <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-{{ icon }}"></i> {{ label }}
+        </button>
+        <div class="dropdown-menu">
+            {% for button in buttons %}
+                <a class="dropdown-item" href="{{ path(button.route, button.params|default({})) }}">
+                    <i class="fas fa-{{ button.icon }}"></i> {{ button.label }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}

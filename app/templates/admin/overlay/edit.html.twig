@@ -1,0 +1,64 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block page_title %}Overlay bearbeiten{% endblock %}
+
+{% block page_actions %}
+    <a href="{{ path('overlay_overview') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Zurück zur übersicht
+    </a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-layer-group"></i> {{ overlay.title ?? 'Unbenannt' }}</h3>
+                </div>
+
+                {{ form_start(form) }}
+                <div class="card-body">
+                    {# Flash Messages #}
+                    {% for message in app.flashes('error') %}
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <i class="fas fa-exclamation-circle"></i> {{ message }}
+                        </div>
+                    {% endfor %}
+
+                    {# Title Field #}
+                    <div class="form-group">
+                        {{ form_label(form.title) }}
+                        {{ form_widget(form.title) }}
+                        {{ form_errors(form.title) }}
+                        <small class="form-text text-muted">
+                            Gib deinem Overlay einen aussagekräftigen Namen.
+                        </small>
+                    </div>
+
+                    {# IsReleased Field #}
+                    <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            {{ form_widget(form.isReleased, {'attr': {'class': 'custom-control-input'}}) }}
+                            {{ form_label(form.isReleased, null, {'label_attr': {'class': 'custom-control-label'}}) }}
+                        </div>
+                        {{ form_errors(form.isReleased) }}
+                        {{ form_help(form.isReleased) }}
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Overlay erstellen
+                    </button>
+                    <a href="{{ path('overlay_overview') }}" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Abbrechen
+                    </a>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
