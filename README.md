@@ -8,7 +8,7 @@ Wolfly.GG is a self-hosted platform for streamers who want to create professiona
 
 Traditional stream overlay creation requires either:
 - Expensive pre-made overlay packages
-- Complex Adobe After Effects tutorials with steep learning curves
+- Complex Adobe After Effects or DaVinci Resolve tutorials with steep learning curves
 - Ongoing subscription costs for Adobe Creative Cloud
 
 Wolfly.GG offers a different approach: a self-hosted platform where you can create, customize, and manage your stream overlays using HTML, CSS, and JavaScript. Full control, zero recurring costs.
