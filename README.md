@@ -28,7 +28,7 @@ Wolfly.GG offers a different approach: a self-hosted platform where you can crea
 - **Database**: PostgreSQL 13
 - **Web Server**: Nginx with PHP-FPM
 - **Containerization**: Docker with multi-stage builds
-- **Frontend**: Simple web technologies (HTML, CSS, JavaScript)
+- **Frontend**: Symfony UX Twig Components, HTML, CSS, JavaScript
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ Wolfly.GG offers a different approach: a self-hosted platform where you can crea
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/skorarcapulus/wolfly.gg
 cd wolfly.gg
 ```
 
@@ -111,6 +111,8 @@ DB_PORT=5432            # Database port
 DB_USER=symfony         # Database user
 DB_PASSWORD=symfony     # Database password
 DB_NAME=symfony_db      # Database name
+USER_ID=1000            # Docker user ID (defaults to 1000)
+GROUP_ID=1000           # Docker group ID (defaults to 1000)
 ```
 
 **Customize Your Setup:**
@@ -146,6 +148,14 @@ make console doctrine:migrations:migrate       # Run migrations
 - Use Symfony best practices and conventions
 - Add PHPDoc comments for classes, methods, and parameters
 - Run `make docs` to generate code documentation
+
+### Dependency Management
+
+**Dependabot Configuration:**
+- Automatically checks for dependency updates weekly
+- Configured for Composer (PHP dependencies) and Docker base images
+- Creates pull requests for available updates
+- Configuration: `.github/dependabot.yml`
 
 ### Docker Architecture
 
