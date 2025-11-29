@@ -1,7 +1,7 @@
 # Multi-stage Dockerfile for Symfony project
 
 # Development stage
-FROM php:8.2-fpm-alpine AS development
+FROM php:8.5-fpm-alpine AS development
 
 # Build arguments for user/group ID matching
 ARG USER_ID=1000
@@ -90,7 +90,7 @@ EXPOSE 80
 CMD ["/start.sh"]
 
 # Production stage
-FROM php:8.2-fpm-alpine AS production
+FROM php:8.5-fpm-alpine AS production
 
 # Install system dependencies
 RUN apk add --no-cache \
