@@ -1,7 +1,7 @@
 # Wolfly.GG
+![Wolfly.GG Logo](https://repository-images.githubusercontent.com/1104537335/6f92e5f9-c82a-46f4-ba7b-94d9846a84a5)
 
-**Create custom stream overlays with HTML, CSS & JavaScript**
-
+**Create custom stream overlays with HTML, CSS & JavaScript**  
 Wolfly.GG is a self-hosted platform for streamers who want to create professional stream overlays without expensive tools or complicated video editing software. Build your custom overlays using web technologies you already know.
 
 ## Overview
